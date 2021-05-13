@@ -5,6 +5,11 @@ Drexel University - Philadelphia, PA, USA
 
 Visit the [project webpage](http://omayer.gitlab.io/forensicsimilarity/) for information and interactive demos!
 
+## Status of the project for the DPI subject:
+- [x] Present the article and code
+- [ ] Implement tool to detect image forgery using open-cv
+
+
 ## Prerequisites 
 *  python 3
 *  python packages:
@@ -15,6 +20,12 @@ Visit the [project webpage](http://omayer.gitlab.io/forensicsimilarity/) for inf
     *  jupyter notebook (for working with example scripts)
     *  matplotlib (for loading images in the examples)
     *  pillow (for loading JPEG images)
+
+
+**NEW**: The prerequisites are now listed in the 'requirements.txt' file. To install it, run:
+```
+$ pip install -r requirements.txt
+```
 
 ## Getting Started
 
