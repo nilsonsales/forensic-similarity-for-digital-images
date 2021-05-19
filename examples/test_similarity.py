@@ -88,8 +88,6 @@ plt.show()
 #image0 and image2 are from different camera models, and have low forensic similarity
 #image1 and image2 are from different camera models, and have low forensic similarity
 
-#%%
-import cv2
 
 #%%
 # Test comparing the first tile to another image
@@ -104,3 +102,51 @@ X0 = np.tile(X0, (X1.shape[0], 1, 1, 1) )
 f_weights = '../pretrained/cam_256x256/-30'
 sim_0_1 = forsim.calculate_forensic_similarity(X0,X1,f_weights,patch_size) #between tiles from image 0 and image 1
 
+#%%
+import cv2 as cv
+
+patch_size = 128
+overlap = patch_size//2
+
+# image downloaded from https://www.reddit.com/user/rombouts
+img = cv.imread('images/edited_1.jpg', 1)
+
+# reference point
+refPt = []
+
+# function to display the coordinates of
+# of the points clicked on the image 
+def click_event(event, x, y, flags, params):
+    # check for left mouse clicks
+    if event == cv.EVENT_LBUTTONDOWN:
+        # displaying the coordinates
+        # on the Shell
+        print(x, ' ', y)
+        refPt.append((x, y))
+
+
+while 0xFF & 0xFF & cv.waitKey(1) != ord('q'):
+    cv.imshow("Select tile", img)
+
+    # setting mouse hadler for the image
+    # and calling the click_event() function
+    cv.setMouseCallback('Select tile', click_event)
+
+#cv.destroyAllWindows()
+#cv.waitKey(1)
+
+x, y = (refPt[0][0]-patch_size//2, refPt[0][1]-patch_size//2)
+w, h = (patch_size, patch_size)
+
+rect = (x,y,w,h)
+
+while 0xFF & cv.waitKey(1) != ord('q'):
+  cv.rectangle(img, (x,y), (x+w,y+h), (0, 255, 0), 2)
+  cv.imshow('img', img)
+cv.destroyAllWindows()
+cv.waitKey(1)
+
+# To do:
+# 1. Achar o tile selecionado na lista
+# 2. Comparar todos os tiles com ele
+# 3. pintar de vermelho os tiles com sim > 0.5
