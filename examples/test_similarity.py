@@ -89,3 +89,18 @@ plt.show()
 #image1 and image2 are from different camera models, and have low forensic similarity
 
 #%%
+import cv2
+
+#%%
+# Test comparing the first tile to another image
+# Select first tile
+X0 = T0[0]
+X0 = np.expand_dims(X0, axis=0)  # create an extra dimension
+
+# Repeat the first tile in a matrix
+X0 = np.tile(X0, (X1.shape[0], 1, 1, 1) ) 
+
+# Lead pretrained weights
+f_weights = '../pretrained/cam_256x256/-30'
+sim_0_1 = forsim.calculate_forensic_similarity(X0,X1,f_weights,patch_size) #between tiles from image 0 and image 1
+
