@@ -140,13 +140,36 @@ w, h = (patch_size, patch_size)
 
 rect = (x,y,w,h)
 
+img_copy = img.copy()  # create a copy to keep our original img
+
 while 0xFF & cv.waitKey(1) != ord('q'):
-  cv.rectangle(img, (x,y), (x+w,y+h), (0, 255, 0), 2)
-  cv.imshow('img', img)
+  cv.rectangle(img_copy, (x,y), (x+w,y+h), (0, 255, 0), 2)
+  cv.imshow('img', img_copy)
 cv.destroyAllWindows()
 cv.waitKey(1)
+
+#%%
+# Save the selected tile
+selected_tile = img[y:y+h,x:x+w]
+plt.imshow(cv.cvtColor(selected_tile, cv.COLOR_BGR2RGB))
+
+
+# Cut the original image in tiles
+T,xy = tile_image(img,width=patch_size,height=patch_size, 
+                x_overlap=overlap,y_overlap=overlap)
+
+
+# Replicate our tile to match the img size
+selected_tile = np.expand_dims(selected_tile, axis=0)  # create an extra dimension
+
+# Repeat the tile in a matrix
+X0 = np.tile(selected_tile, (T.shape[0], 1, 1, 1) )
 
 # To do:
 # 1. Achar o tile selecionado na lista
 # 2. Comparar todos os tiles com ele
-# 3. pintar de vermelho os tiles com sim > 0.5
+# 3. pintar de vermelho os tiles com sim < 0.5
+
+# Draw red rectangle:
+# cv.rectangle(img, (x,y), (x+w,y+h), (0, 0, 255), -1) # how to add alpha channel ?
+# %%
