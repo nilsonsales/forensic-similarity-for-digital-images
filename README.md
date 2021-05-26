@@ -5,9 +5,19 @@ Drexel University - Philadelphia, PA, USA
 
 Visit the [project webpage](http://omayer.gitlab.io/forensicsimilarity/) for information and interactive demos!
 
-## Status of the project for the DPI subject:
+## Status of the project for the DPI subject
 - [x] Present the article and code
 - [x] Implement tool to detect image forgery using open-cv
+
+A tool to visualise forgery detection is implemented in `examples/test_similarity.py`. If you want to use a different image, edit directly in the code.
+
+- After you run the file, select a point on the image and press 'q';
+- The selected region will be shown you, press 'q' again to continue;
+- Wait for the model to calculate the similarity, it might take a few seconds;
+- When it's done, check the result and press 'q' to quit.
+
+## Example of Forgery Detection
+<img src="https://github.com/nilsonsales/forensic-similarity-for-digital-images/raw/master/examples/images/original_2.jpg" width="512"> <img src="https://github.com/nilsonsales/forensic-similarity-for-digital-images/raw/master/examples/images/detected_2.jpg" width="512">
 
 
 ## Prerequisites 
@@ -22,7 +32,7 @@ Visit the [project webpage](http://omayer.gitlab.io/forensicsimilarity/) for inf
     *  pillow (for loading JPEG images)
 
 
-**NEW**: The prerequisites are now listed in the 'requirements.txt' file. To install it, run:
+**NEW**: The prerequisites are now listed in the `requirements.txt` file. To install it, run:
 ```
 $ pip install -r requirements.txt
 ```
@@ -33,8 +43,6 @@ Use the "calculate_forensic_similarity" definition in forensic_similarity.py to 
 
 Please see the [jupyter notebook examples](https://gitlab.com/MISLgit/forensic-similarity-for-digital-images/tree/master/examples) for how to use the forensic similarity code.
 
-## Example of Forgery Detection
-<img src="https://github.com/nilsonsales/forensic-similarity-for-digital-images/raw/master/examples/images/original_2.jpg" width="512"> <img src="https://github.com/nilsonsales/forensic-similarity-for-digital-images/raw/master/examples/images/detected_2.jpg" width="512">
 
 ## Cite this code
 If you are using this code for academic research, please cite this paper:
