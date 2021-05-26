@@ -34,8 +34,7 @@ Use the "calculate_forensic_similarity" definition in forensic_similarity.py to 
 Please see the [jupyter notebook examples](https://gitlab.com/MISLgit/forensic-similarity-for-digital-images/tree/master/examples) for how to use the forensic similarity code.
 
 ## Example of Forgery Detection
-
-<img src="https://github.com/nilsonsales/forensic-similarity-for-digital-images/raw/master/examples/images/detected_2.jpg" width="720">
+<img src="https://github.com/nilsonsales/forensic-similarity-for-digital-images/raw/master/examples/images/original_2.jpg" width="480"> <img src="https://github.com/nilsonsales/forensic-similarity-for-digital-images/raw/master/examples/images/detected_2.jpg" width="480">
 
 ## Cite this code
 If you are using this code for academic research, please cite this paper:
