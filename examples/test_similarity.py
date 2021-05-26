@@ -98,9 +98,10 @@ X0 = np.expand_dims(X0, axis=0)  # create an extra dimension
 # Repeat the first tile in a matrix
 X0 = np.tile(X0, (X1.shape[0], 1, 1, 1) ) 
 
-# Lead pretrained weights
+# Load pretrained weights
 f_weights = '../pretrained/cam_256x256/-30'
 sim_0_1 = forsim.calculate_forensic_similarity(X0,X1,f_weights,patch_size) #between tiles from image 0 and image 1
+
 
 #%%
 import cv2 as cv
@@ -161,9 +162,25 @@ T,xy = tile_image(img,width=patch_size,height=patch_size,
 
 # Replicate our tile to match the img size
 my_tile = np.expand_dims(my_tile, axis=0)  # create an extra dimension
+#my_tile = np.expand_dims(T[49], axis=0)  # create an extra dimension
 
 # Repeat the tile in a matrix
 my_tile_matrix = np.tile(my_tile, (T.shape[0], 1, 1, 1) )
+
+
+# ---- CALCULATE SIMILARITY ----
+# Load pretrained weights
+f_weights = '../pretrained/cam_128x128/-30'
+sim = forsim.calculate_forensic_similarity(my_tile_matrix,T,f_weights,patch_size)
+
+
+# Get the positions of tiles with low similarity
+not_similar = sim < 0.5
+
+positions = []
+for i in range(0, T.shape[0]):
+    if not_similar[i]:
+        positions.append(xy[i])
 
 # To do:
 # 1. Achar o tile selecionado na lista
