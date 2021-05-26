@@ -7,7 +7,7 @@ Visit the [project webpage](http://omayer.gitlab.io/forensicsimilarity/) for inf
 
 ## Status of the project for the DPI subject:
 - [x] Present the article and code
-- [ ] Implement tool to detect image forgery using open-cv
+- [x] Implement tool to detect image forgery using open-cv
 
 
 ## Prerequisites 
@@ -32,6 +32,10 @@ $ pip install -r requirements.txt
 Use the "calculate_forensic_similarity" definition in forensic_similarity.py to calculate the forensic similarity between two image patches.
 
 Please see the [jupyter notebook examples](https://gitlab.com/MISLgit/forensic-similarity-for-digital-images/tree/master/examples) for how to use the forensic similarity code.
+
+## Example of Forgery Detection
+
+<img src="https://github.com/nilsonsales/forensic-similarity-for-digital-images/raw/master/examples/images/detected_2.jpg" width="720">
 
 ## Cite this code
 If you are using this code for academic research, please cite this paper:
