@@ -16,7 +16,7 @@ A tool to visualise forgery detection is implemented in `examples/test_similarit
 - Wait for the model to calculate the similarity, it might take a few seconds;
 - When it's done, check the result and press 'q' to quit.
 
-## Example of Forgery Detection
+### Example of Forgery Detection
 <img src="https://github.com/nilsonsales/forensic-similarity-for-digital-images/raw/master/examples/images/original_2.jpg" width="512"> <img src="https://github.com/nilsonsales/forensic-similarity-for-digital-images/raw/master/examples/images/detected_2.jpg" width="512">
 
 
