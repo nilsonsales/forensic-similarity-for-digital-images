@@ -108,11 +108,17 @@ sim_0_1 = forsim.calculate_forensic_similarity(X0,X1,f_weights,patch_size) #betw
 #%%
 import cv2 as cv
 
-patch_size = 128
-overlap = patch_size//2
 
-# image downloaded from https://www.reddit.com/user/rombouts
-img = cv.imread('images/edited_1.jpg', 1)
+# images downloaded from https://www.reddit.com/user/rombouts
+img = cv.imread('images/edited_2.jpg', 1)
+
+# Define patch size depending on the image size
+if img.shape[0] >= 2160:
+    patch_size = 256
+else:
+    patch_size = 128
+
+overlap = patch_size//2
 
 # reference point
 refPt = []
@@ -138,7 +144,7 @@ while 0xFF & 0xFF & cv.waitKey(1) != ord('q'):
 #cv.destroyAllWindows()
 #cv.waitKey(1)
 
-x, y = (refPt[0][0]-patch_size//2, refPt[0][1]-patch_size//2)
+x, y = (refPt[-1][0]-patch_size//2, refPt[-1][1]-patch_size//2)
 w, h = (patch_size, patch_size)
 
 rect = (x,y,w,h)
@@ -151,10 +157,10 @@ while 0xFF & cv.waitKey(1) != ord('q'):
 cv.destroyAllWindows()
 cv.waitKey(1)
 
-#%%
+#
 # Save the selected tile
 my_tile = img[y:y+h,x:x+w]
-plt.imshow(cv.cvtColor(my_tile, cv.COLOR_BGR2RGB))
+#plt.imshow(cv.cvtColor(my_tile, cv.COLOR_BGR2RGB))
 
 
 # Cut the original image in tiles
@@ -172,7 +178,8 @@ my_tile_matrix = np.tile(my_tile, (T.shape[0], 1, 1, 1) )
 
 # ---- CALCULATE SIMILARITY ----
 # Load pretrained weights
-f_weights = '../pretrained/cam_128x128/-30'
+#f_weights = '../pretrained/cam_128x128/-30'
+f_weights = '../pretrained/cam_'+str(patch_size)+'x'+str(patch_size)+'/-30'
 sim = forsim.calculate_forensic_similarity(my_tile_matrix,T,f_weights,patch_size)
 
 
@@ -184,11 +191,12 @@ for i in range(0, T.shape[0]):
     if not_similar[i]:
         positions.append(xy[i])
 
-#%%
+
 # Plot red rectangle over tiles with low sim
 alpha = 0.3
 output = img.copy()
 
+print("Plotting red squares...")
 for xy in positions:
     overlay = output.copy()
     cv.rectangle(overlay, xy, (xy[0]+w-1, xy[1]+h-1), (0, 0, 255), -1)
@@ -196,13 +204,14 @@ for xy in positions:
 
 cv.rectangle(output, (x,y), (x+w,y+h), (0, 255, 0), 2) # green rectangle
 
+print("Done.")
 while 0xFF & cv.waitKey(1) != ord('q'):
     cv.imshow('output', output)
 cv.destroyAllWindows()
 cv.waitKey(1)
 
 # Save image to disk
-cv.imwrite('images/detected_1.jpg', output)
+#cv.imwrite('images/detected_1.jpg', output)
 
 # To do:
 # 1. Achar o tile selecionado na lista
