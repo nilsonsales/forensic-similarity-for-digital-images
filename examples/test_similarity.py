@@ -4,6 +4,8 @@
 
 #%%
 import sys
+
+from numpy.core.numeric import outer
 sys.path.append('..')
 import matplotlib.pyplot as plt
 import numpy as np
@@ -183,18 +185,18 @@ for i in range(0, T.shape[0]):
         positions.append(xy[i])
 
 #%%
-import copy
 # Plot red rectangle over tiles with low sim
-overlay = img_copy.copy()
-output = img_copy.copy()
-alpha = 0.5
+alpha = 0.3
+output = img.copy()
+
+for xy in positions:
+    overlay = output.copy()
+    cv.rectangle(overlay, xy, (xy[0]+w,xy[1]+h), (0, 0, 255), -1)
+    cv.addWeighted(overlay, alpha, output, 1 - alpha, 0, output)
+
+cv.rectangle(output, (x,y), (x+w,y+h), (0, 255, 0), 2) # green rectangle
 
 while 0xFF & cv.waitKey(1) != ord('q'):
-    for xy in positions:
-        cv.rectangle(overlay, xy, (xy[0]+w,xy[1]+h), (0, 0, 255), -1)
-
-    cv.addWeighted(overlay, alpha, img, 1 - alpha, 0, output)
-    cv.rectangle(output, (x,y), (x+w,y+h), (0, 255, 0), 2) # green rectangle
     cv.imshow('output', output)
 cv.destroyAllWindows()
 cv.waitKey(1)
