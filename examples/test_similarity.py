@@ -191,7 +191,7 @@ output = img.copy()
 
 for xy in positions:
     overlay = output.copy()
-    cv.rectangle(overlay, xy, (xy[0]+w,xy[1]+h), (0, 0, 255), -1)
+    cv.rectangle(overlay, xy, (xy[0]+w-1, xy[1]+h-1), (0, 0, 255), -1)
     cv.addWeighted(overlay, alpha, output, 1 - alpha, 0, output)
 
 cv.rectangle(output, (x,y), (x+w,y+h), (0, 255, 0), 2) # green rectangle
