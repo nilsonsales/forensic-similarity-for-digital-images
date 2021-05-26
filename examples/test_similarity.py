@@ -201,11 +201,10 @@ while 0xFF & cv.waitKey(1) != ord('q'):
 cv.destroyAllWindows()
 cv.waitKey(1)
 
+# Save image to disk
+cv.imwrite('images/detected_1.jpg', output)
+
 # To do:
 # 1. Achar o tile selecionado na lista
 # 2. Comparar todos os tiles com ele
 # 3. pintar de vermelho os tiles com sim < 0.5
-
-# Draw red rectangle:
-# cv.rectangle(img, (x,y), (x+w,y+h), (0, 0, 255), -1) # how to add alpha channel ?
-# %%
