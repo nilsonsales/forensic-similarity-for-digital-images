@@ -150,8 +150,8 @@ cv.waitKey(1)
 
 #%%
 # Save the selected tile
-selected_tile = img[y:y+h,x:x+w]
-plt.imshow(cv.cvtColor(selected_tile, cv.COLOR_BGR2RGB))
+my_tile = img[y:y+h,x:x+w]
+plt.imshow(cv.cvtColor(my_tile, cv.COLOR_BGR2RGB))
 
 
 # Cut the original image in tiles
@@ -160,10 +160,10 @@ T,xy = tile_image(img,width=patch_size,height=patch_size,
 
 
 # Replicate our tile to match the img size
-selected_tile = np.expand_dims(selected_tile, axis=0)  # create an extra dimension
+my_tile = np.expand_dims(my_tile, axis=0)  # create an extra dimension
 
 # Repeat the tile in a matrix
-X0 = np.tile(selected_tile, (T.shape[0], 1, 1, 1) )
+my_tile_matrix = np.tile(my_tile, (T.shape[0], 1, 1, 1) )
 
 # To do:
 # 1. Achar o tile selecionado na lista
