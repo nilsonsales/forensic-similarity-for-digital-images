@@ -144,8 +144,8 @@ rect = (x,y,w,h)
 img_copy = img.copy()  # create a copy to keep our original img
 
 while 0xFF & cv.waitKey(1) != ord('q'):
-  cv.rectangle(img_copy, (x,y), (x+w,y+h), (0, 255, 0), 2)
-  cv.imshow('img', img_copy)
+    cv.rectangle(img_copy, (x,y), (x+w,y+h), (0, 255, 0), 2)
+    cv.imshow('img_copy', img_copy)
 cv.destroyAllWindows()
 cv.waitKey(1)
 
@@ -181,6 +181,23 @@ positions = []
 for i in range(0, T.shape[0]):
     if not_similar[i]:
         positions.append(xy[i])
+
+#%%
+import copy
+# Plot red rectangle over tiles with low sim
+overlay = img_copy.copy()
+output = img_copy.copy()
+alpha = 0.5
+
+while 0xFF & cv.waitKey(1) != ord('q'):
+    for xy in positions:
+        cv.rectangle(overlay, xy, (xy[0]+w,xy[1]+h), (0, 0, 255), -1)
+
+    cv.addWeighted(overlay, alpha, img, 1 - alpha, 0, output)
+    cv.rectangle(output, (x,y), (x+w,y+h), (0, 255, 0), 2) # green rectangle
+    cv.imshow('output', output)
+cv.destroyAllWindows()
+cv.waitKey(1)
 
 # To do:
 # 1. Achar o tile selecionado na lista
